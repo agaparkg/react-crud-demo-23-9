@@ -41,12 +41,16 @@ export default function Students() {
 
   //   && logical operator
 
+  const handleStudentDelete = (id) => {
+    console.log(id);
+  };
+
   return (
     <Container className="border p-2">
       {/* <Button onClick={() => fetchAndSetState()}>Refetch</Button> */}
       {/* {isLoading && <div>Hello World</div>} */}
       {/* {isLoading ? <div>Hello World</div> : <div>Bye bye World</div>} */}
-      {!isLoading ? (
+      {students.length === 0 && !isLoading ? (
         <Spinner color="primary">Loading...</Spinner>
       ) : (
         <Table bordered hover responsive>
@@ -64,7 +68,12 @@ export default function Students() {
           <tbody>
             {students.map((student, index) => {
               return (
-                <SingleStudent key={student.id} {...student} index={index} />
+                <SingleStudent
+                  handleStudentDelete={handleStudentDelete}
+                  key={student.id}
+                  {...student}
+                  index={index}
+                />
               );
             })}
           </tbody>
