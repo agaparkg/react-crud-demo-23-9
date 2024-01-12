@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "reactstrap";
 
 export default function SingleStudent({
   index,
@@ -18,7 +19,17 @@ export default function SingleStudent({
       <td>{lname}</td>
       <td>{age}</td>
       <td>{country}</td>
-      <td>@mdo</td>
+      <td>
+        <Button>
+          <i className="fa fa-pencil"></i>
+        </Button>
+        <Button color="danger" className="mx-2">
+          <i className="fa fa-trash"></i>
+        </Button>
+        <Button color="primary">
+          <i className="fa fa-info"></i>
+        </Button>
+      </td>
     </tr>
   );
 }
