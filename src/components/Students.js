@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Container, Table, Button } from "reactstrap";
+import fetchData from "../utils/apiCalls/getData";
 
 export default function Students() {
-  const [name, setName] = useState("");
+  //   const [name, setName] = useState("");
   const [students, setStudents] = useState([]);
+
+  const fetchAndSetState = async () => {
+    // console.log(await fetchData());
+    setStudents(await fetchData());
+  };
 
   // componentDidMount(){}
   useEffect(() => {
+    fetchAndSetState();
     // console.log("componentDidMount");
-    const fetchData = async () => {
-      const url = "https://627ef576b1cc1b12624eaac1.mockapi.io/api/v1/students";
+    // fetchData().then((data) => setStudents(data));
 
-      try {
-        const res = await fetch(url);
-        const data = await res.json();
-
-        setStudents(data);
-      } catch (error) {}
-    };
-
-    fetchData();
+    // IIFE
+    // (async () => {
+    //   setStudents(await fetchData());
+    // })();
   }, []);
 
   //   useEffect(() => {
@@ -49,9 +50,7 @@ export default function Students() {
             <td>@mdo</td>
             <td>@mdo</td>
             <td>@mdo</td>
-            <td>
-              <Button onClick={() => setName("John")}>Change</Button>
-            </td>
+            <td>@mdo</td>
           </tr>
         </tbody>
       </Table>
