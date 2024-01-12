@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Container, Table, Spinner, Button } from "reactstrap";
+import { Container, Table, Spinner } from "reactstrap";
 import fetchData from "../utils/apiCalls/getData";
 import SingleStudent from "./SingleStudent";
 import deleteData from "../utils/apiCalls/deleteData";
+import AppModal from "./AppModal";
 
-export default function Students() {
+export default function Students({ searchQuery }) {
   //   const [name, setName] = useState("");
   const [students, setStudents] = useState([]);
+  const [stId, setStId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [modal, setModal] = useState(false);
+
+  const toggle = (id) => {
+    setModal(!modal);
+    setStId(id);
+  };
 
   const fetchAndSetState = async () => {
     // console.log(await fetchData());
@@ -44,17 +52,23 @@ export default function Students() {
 
   const handleStudentDelete = (id) => {
     deleteData(id).then((data) => {
-      console.log("Successfully deleted student", data);
+      //   console.log("Successfully deleted student", data);
       fetchAndSetState();
     });
   };
+
+  const filteredStudents = students.filter(
+    (student) =>
+      student.fname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      student.lname.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <Container className="border p-2">
       {/* <Button onClick={() => fetchAndSetState()}>Refetch</Button> */}
       {/* {isLoading && <div>Hello World</div>} */}
       {/* {isLoading ? <div>Hello World</div> : <div>Bye bye World</div>} */}
-      {students.length === 0 && !isLoading ? (
+      {filteredStudents.length === 0 && !isLoading ? (
         <Spinner color="primary">Loading...</Spinner>
       ) : (
         <Table bordered hover responsive>
@@ -70,9 +84,10 @@ export default function Students() {
             </tr>
           </thead>
           <tbody>
-            {students.map((student, index) => {
+            {filteredStudents.map((student, index) => {
               return (
                 <SingleStudent
+                  toggle={toggle}
                   handleStudentDelete={handleStudentDelete}
                   key={student.id}
                   {...student}
@@ -83,6 +98,12 @@ export default function Students() {
           </tbody>
         </Table>
       )}
+      <AppModal
+        stId={stId}
+        modal={modal}
+        toggle={toggle}
+        handleStudentDelete={handleStudentDelete}
+      />
     </Container>
   );
 }

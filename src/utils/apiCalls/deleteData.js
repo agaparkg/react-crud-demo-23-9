@@ -16,7 +16,7 @@ export default async function deleteData(id) {
     method: "DELETE",
   };
 
-  console.log(BASE_URL + "/" + id); // students/57
+  // console.log(BASE_URL + "/" + id); // students/57
   try {
     const res = await fetch(BASE_URL + "/" + id, options);
     const data = await res.json();

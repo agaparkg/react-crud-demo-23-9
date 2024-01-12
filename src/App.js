@@ -7,12 +7,11 @@ import Students from "./components/Students";
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
 
-  console.log(searchQuery);
   return (
     <div className="App">
       <h1>React Students CRUD App</h1>
       <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <Students />
+      <Students searchQuery={searchQuery} />
       <footer>Seytech LLC. All Rights Reserved.</footer>
     </div>
   );
