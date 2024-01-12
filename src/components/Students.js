@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Table, Spinner, Button } from "reactstrap";
 import fetchData from "../utils/apiCalls/getData";
 import SingleStudent from "./SingleStudent";
+import deleteData from "../utils/apiCalls/deleteData";
 
 export default function Students() {
   //   const [name, setName] = useState("");
@@ -42,7 +43,10 @@ export default function Students() {
   //   && logical operator
 
   const handleStudentDelete = (id) => {
-    console.log(id);
+    deleteData(id).then((data) => {
+      console.log("Successfully deleted student", data);
+      fetchAndSetState();
+    });
   };
 
   return (
