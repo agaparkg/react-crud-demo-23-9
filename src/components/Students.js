@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Table, Button } from "reactstrap";
 import fetchData from "../utils/apiCalls/getData";
+import SingleStudent from "./SingleStudent";
 
 export default function Students() {
   //   const [name, setName] = useState("");
@@ -43,15 +44,11 @@ export default function Students() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-          </tr>
+          {students.map((student, index) => {
+            return (
+              <SingleStudent key={student.id} {...student} index={index} />
+            );
+          })}
         </tbody>
       </Table>
     </Container>
