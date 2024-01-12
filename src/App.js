@@ -9,6 +9,7 @@ function App() {
       <h1>React Students CRUD App</h1>
       <Header />
       <Students />
+      <footer>Seytech LLC. All Rights Reserved.</footer>
     </div>
   );
 }
