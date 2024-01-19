@@ -5,18 +5,18 @@ import Search from "./Search";
 export default function Header({
   setSearchQuery,
   searchQuery,
-  modalAction,
   setModalAction,
-  toggle,
+  setModal,
 }) {
+  const handleAddBtnClick = () => {
+    setModal(true);
+    setModalAction("add");
+  };
+
   return (
     <InputGroup className="w-50 my-2 mx-auto">
       <Search setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
-      <Button
-        className="ms-2"
-        color="primary"
-        onClick={() => toggle(null, "add")}
-      >
+      <Button className="ms-2" color="primary" onClick={handleAddBtnClick}>
         {/* ms --> margin start */}
         Add New Student
       </Button>

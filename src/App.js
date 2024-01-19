@@ -11,29 +11,22 @@ function App() {
   const [modal, setModal] = useState(false);
   const [stId, setStId] = useState(null);
 
-  const toggle = (id, action) => {
-    setModalAction(action); // info
-    setModal(!modal); // true
-    setStId(id);
-  };
-
   return (
     <div className="App">
       <h1>React Students CRUD App</h1>
       <Header
-        toggle={toggle}
+        setModal={setModal}
         setModalAction={setModalAction}
-        modal={modal}
-        modalAction={modalAction}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
       <Students
-        toggle={toggle}
         stId={stId}
+        setStId={setStId}
         setModalAction={setModalAction}
         modalAction={modalAction}
         modal={modal}
+        setModal={setModal}
         searchQuery={searchQuery}
       />
       <footer>Seytech LLC. All Rights Reserved.</footer>

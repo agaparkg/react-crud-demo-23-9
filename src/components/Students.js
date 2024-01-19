@@ -3,18 +3,21 @@ import { Container, Table, Spinner } from "reactstrap";
 import fetchData from "../utils/apiCalls/getData";
 import SingleStudent from "./SingleStudent";
 import deleteData from "../utils/apiCalls/deleteData";
-import AppModal from "./AppModal";
+import AppModal from "./modals/AppModal";
 
 export default function Students({
   searchQuery,
-  toggle,
   stId,
   modal,
+  setStId,
+  setModal,
   modalAction,
+  setModalAction,
 }) {
   //   const [name, setName] = useState("");
   const [students, setStudents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [student, setStudent] = useState(null);
 
   const fetchAndSetState = async () => {
     // console.log(await fetchData());
@@ -48,6 +51,13 @@ export default function Students({
   //   }
 
   //   && logical operator
+
+  const toggle = (id, action) => {
+    setStudent(students.find((st) => st.id === id));
+    setModalAction(action); // info
+    setModal(!modal); // true
+    setStId(id);
+  };
 
   const handleStudentDelete = (id) => {
     deleteData(id).then((data) => {
@@ -102,6 +112,7 @@ export default function Students({
         stId={stId}
         modal={modal}
         toggle={toggle}
+        student={student}
         handleStudentDelete={handleStudentDelete}
       />
     </Container>

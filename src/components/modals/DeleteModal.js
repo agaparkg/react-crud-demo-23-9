@@ -11,12 +11,12 @@ export default function DeleteModal({ toggle, handleStudentDelete, stId }) {
           color="primary"
           onClick={() => {
             handleStudentDelete(stId);
-            toggle(stId, "delete");
+            toggle(null, null);
           }}
         >
           Delete
         </Button>{" "}
-        <Button color="secondary" onClick={toggle}>
+        <Button color="secondary" onClick={() => toggle(null, null)}>
           Cancel
         </Button>
       </ModalFooter>
