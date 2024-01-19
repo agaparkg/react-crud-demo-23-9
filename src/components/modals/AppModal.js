@@ -8,6 +8,7 @@ function AppModal({
   modal,
   toggle,
   handleStudentDelete,
+  handleStudentAdd,
   stId,
   modalAction,
   student,
@@ -22,7 +23,9 @@ function AppModal({
             toggle={toggle}
           />
         )}
-        {modalAction === "add" && <AddModal toggle={toggle} />}
+        {modalAction === "add" && (
+          <AddModal handleStudentAdd={handleStudentAdd} toggle={toggle} />
+        )}
         {/* {modalAction === "edit" && <EditModal />} */}
         {modalAction === "info" && <InfoModal {...student} toggle={toggle} />}
       </Modal>

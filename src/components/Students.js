@@ -4,6 +4,7 @@ import fetchData from "../utils/apiCalls/getData";
 import SingleStudent from "./SingleStudent";
 import deleteData from "../utils/apiCalls/deleteData";
 import AppModal from "./modals/AppModal";
+import createData from "../utils/apiCalls/createData";
 
 export default function Students({
   searchQuery,
@@ -23,7 +24,9 @@ export default function Students({
     // console.log(await fetchData());
     setIsLoading(false);
     setStudents(await fetchData());
-    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(true);
+    }, 500);
   };
 
   // componentDidMount(){}
@@ -66,6 +69,14 @@ export default function Students({
     });
   };
 
+  const handleStudentAdd = (newStudent) => {
+    // values
+    createData(newStudent).then((data) => {
+      //   console.log("Successfully added a new student", data);
+      fetchAndSetState();
+    });
+  };
+
   const filteredStudents = students.filter(
     (student) =>
       student.fname.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -77,7 +88,7 @@ export default function Students({
       {/* <Button onClick={() => fetchAndSetState()}>Refetch</Button> */}
       {/* {isLoading && <div>Hello World</div>} */}
       {/* {isLoading ? <div>Hello World</div> : <div>Bye bye World</div>} */}
-      {filteredStudents.length === 0 && !isLoading ? (
+      {!isLoading ? (
         <Spinner color="primary">Loading...</Spinner>
       ) : (
         <Table bordered hover responsive>
@@ -107,14 +118,17 @@ export default function Students({
           </tbody>
         </Table>
       )}
-      <AppModal
-        modalAction={modalAction}
-        stId={stId}
-        modal={modal}
-        toggle={toggle}
-        student={student}
-        handleStudentDelete={handleStudentDelete}
-      />
+      {modal && (
+        <AppModal
+          modalAction={modalAction}
+          stId={stId}
+          modal={modal}
+          toggle={toggle}
+          student={student}
+          handleStudentAdd={handleStudentAdd}
+          handleStudentDelete={handleStudentDelete}
+        />
+      )}
     </Container>
   );
 }

@@ -18,7 +18,7 @@ const initialValues = {
   age: "",
 };
 
-export default function AddModal({ toggle }) {
+export default function AddModal({ toggle, handleStudentAdd }) {
   const [values, setValues] = useState(initialValues);
 
   const handleInputChange = (e) => {
@@ -38,7 +38,8 @@ export default function AddModal({ toggle }) {
     // if (fname.trim() !== '' && lname.trim() !== '' ) {
     // ["", "", ""....]
     if (Object.values(values).every((v) => v.trim() !== "")) {
-      alert("Success.");
+      handleStudentAdd(values);
+      toggle(null, null);
     } else {
       alert("Please fill out all the required fields.");
     }
@@ -46,7 +47,6 @@ export default function AddModal({ toggle }) {
 
   const { fname, lname, age, company, country } = values;
 
-  console.log(values);
   return (
     <>
       <ModalHeader toggle={toggle}>Add New Student?</ModalHeader>
