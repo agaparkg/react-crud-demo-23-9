@@ -5,6 +5,7 @@ import SingleStudent from "./SingleStudent";
 import deleteData from "../utils/apiCalls/deleteData";
 import AppModal from "./modals/AppModal";
 import createData from "../utils/apiCalls/createData";
+import updateData from "../utils/apiCalls/updateData";
 
 export default function Students({
   searchQuery,
@@ -77,6 +78,14 @@ export default function Students({
     });
   };
 
+  const handleStudentEdit = (newStudent) => {
+    // values
+    updateData(newStudent).then((data) => {
+      //   console.log("Successfully updated the student", data);
+      fetchAndSetState();
+    });
+  };
+
   const filteredStudents = students.filter(
     (student) =>
       student.fname.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -126,6 +135,7 @@ export default function Students({
           toggle={toggle}
           student={student}
           handleStudentAdd={handleStudentAdd}
+          handleStudentEdit={handleStudentEdit}
           handleStudentDelete={handleStudentDelete}
         />
       )}

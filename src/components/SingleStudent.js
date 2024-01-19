@@ -23,7 +23,7 @@ export default function SingleStudent({
       <td>{age}</td>
       <td>{country}</td>
       <td>
-        <Button>
+        <Button onClick={() => toggle(id, "edit")}>
           <i className="fa fa-pencil"></i>
         </Button>
         <Button

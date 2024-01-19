@@ -3,12 +3,14 @@ import { Modal } from "reactstrap";
 import DeleteModal from "./DeleteModal";
 import InfoModal from "./InfoModal";
 import AddModal from "./AddModal";
+import EditModal from "./EditModal";
 
 function AppModal({
   modal,
   toggle,
   handleStudentDelete,
   handleStudentAdd,
+  handleStudentEdit,
   stId,
   modalAction,
   student,
@@ -26,7 +28,13 @@ function AppModal({
         {modalAction === "add" && (
           <AddModal handleStudentAdd={handleStudentAdd} toggle={toggle} />
         )}
-        {/* {modalAction === "edit" && <EditModal />} */}
+        {modalAction === "edit" && (
+          <EditModal
+            handleStudentEdit={handleStudentEdit}
+            student={student}
+            toggle={toggle}
+          />
+        )}
         {modalAction === "info" && <InfoModal {...student} toggle={toggle} />}
       </Modal>
     </div>
