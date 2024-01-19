@@ -1,26 +1,21 @@
 import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal } from "reactstrap";
+import DeleteModal from "./modalForms/DeleteModal";
 
-function AppModal({ modal, toggle, handleStudentDelete, stId }) {
+function AppModal({ modal, toggle, handleStudentDelete, stId, modalAction }) {
   return (
     <div>
       <Modal isOpen={modal} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Delete?</ModalHeader>
-        <ModalBody>Are you sure you wanna delete this user?</ModalBody>
-        <ModalFooter>
-          <Button
-            color="primary"
-            onClick={() => {
-              handleStudentDelete(stId);
-              toggle();
-            }}
-          >
-            Delete
-          </Button>{" "}
-          <Button color="secondary" onClick={toggle}>
-            Cancel
-          </Button>
-        </ModalFooter>
+        {modalAction === "delete" && (
+          <DeleteModal
+            stId={stId}
+            handleStudentDelete={handleStudentDelete}
+            toggle={toggle}
+          />
+        )}
+        {/* {modalAction === "add" && <AddModal />} */}
+        {/* {modalAction === "edit" && <EditModal />} */}
+        {/* {modalAction === "info" && <InfoModal />} */}
       </Modal>
     </div>
   );

@@ -26,10 +26,14 @@ export default function SingleStudent({
         <Button>
           <i className="fa fa-pencil"></i>
         </Button>
-        <Button color="danger" className="mx-2" onClick={() => toggle(id)}>
+        <Button
+          color="danger"
+          className="mx-2"
+          onClick={() => toggle(id, "delete")}
+        >
           <i className="fa fa-trash"></i>
         </Button>
-        <Button color="primary">
+        <Button color="primary" onClick={() => toggle(id, "info")}>
           <i className="fa fa-info"></i>
         </Button>
       </td>

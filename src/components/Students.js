@@ -5,17 +5,16 @@ import SingleStudent from "./SingleStudent";
 import deleteData from "../utils/apiCalls/deleteData";
 import AppModal from "./AppModal";
 
-export default function Students({ searchQuery }) {
+export default function Students({
+  searchQuery,
+  toggle,
+  stId,
+  modal,
+  modalAction,
+}) {
   //   const [name, setName] = useState("");
   const [students, setStudents] = useState([]);
-  const [stId, setStId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [modal, setModal] = useState(false);
-
-  const toggle = (id) => {
-    setModal(!modal);
-    setStId(id);
-  };
 
   const fetchAndSetState = async () => {
     // console.log(await fetchData());
@@ -64,7 +63,7 @@ export default function Students({ searchQuery }) {
   );
 
   return (
-    <Container className="border p-2">
+    <Container className="border p-2" fluid>
       {/* <Button onClick={() => fetchAndSetState()}>Refetch</Button> */}
       {/* {isLoading && <div>Hello World</div>} */}
       {/* {isLoading ? <div>Hello World</div> : <div>Bye bye World</div>} */}
@@ -99,6 +98,7 @@ export default function Students({ searchQuery }) {
         </Table>
       )}
       <AppModal
+        modalAction={modalAction}
         stId={stId}
         modal={modal}
         toggle={toggle}
