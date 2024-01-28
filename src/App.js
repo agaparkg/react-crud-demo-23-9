@@ -6,7 +6,6 @@ import Students from "./components/Students";
 
 function App() {
   const [searchQuery, setSearchQuery] = useState("");
-  // modalAction: delete, edit, add, info
   const [modalAction, setModalAction] = useState(null);
   const [modal, setModal] = useState(false);
   const [stId, setStId] = useState(null);

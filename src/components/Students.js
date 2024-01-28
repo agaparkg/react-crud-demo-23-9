@@ -93,7 +93,7 @@ export default function Students({
   );
 
   return (
-    <Container className="border p-2" fluid>
+    <Container className="border p-2 scrolling" fluid>
       {/* <Button onClick={() => fetchAndSetState()}>Refetch</Button> */}
       {/* {isLoading && <div>Hello World</div>} */}
       {/* {isLoading ? <div>Hello World</div> : <div>Bye bye World</div>} */}
