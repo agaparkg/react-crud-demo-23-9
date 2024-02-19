@@ -1,7 +1,9 @@
 import React from "react";
 import { Button, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { useStateContextApi } from "../../utils/context/context-api";
 
-export default function DeleteModal({ toggle, handleStudentDelete, stId }) {
+export default function DeleteModal() {
+  const { toggle, handleStudentDelete, stId } = useStateContextApi();
   return (
     <>
       <ModalHeader toggle={toggle}>Delete?</ModalHeader>

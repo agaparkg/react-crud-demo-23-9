@@ -1,17 +1,17 @@
 import React from "react";
 import { Button } from "reactstrap";
+import { useStateContextApi } from "../utils/context/context-api";
 
 export default function SingleStudent({
-  index,
   avatar,
   fname,
   lname,
   age,
   country,
   id,
-  handleStudentDelete,
-  toggle,
+  index,
 }) {
+  const { toggle } = useStateContextApi();
   return (
     <tr>
       <th scope="row">{index + 1}</th>

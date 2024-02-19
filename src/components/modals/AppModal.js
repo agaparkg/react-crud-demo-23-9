@@ -4,38 +4,17 @@ import DeleteModal from "./DeleteModal";
 import InfoModal from "./InfoModal";
 import AddModal from "./AddModal";
 import EditModal from "./EditModal";
+import { useStateContextApi } from "../../utils/context/context-api";
 
-function AppModal({
-  modal,
-  toggle,
-  handleStudentDelete,
-  handleStudentAdd,
-  handleStudentEdit,
-  stId,
-  modalAction,
-  student,
-}) {
+function AppModal() {
+  const { modal, toggle, modalAction } = useStateContextApi();
   return (
     <div>
       <Modal isOpen={modal} toggle={toggle}>
-        {modalAction === "delete" && (
-          <DeleteModal
-            stId={stId}
-            handleStudentDelete={handleStudentDelete}
-            toggle={toggle}
-          />
-        )}
-        {modalAction === "add" && (
-          <AddModal handleStudentAdd={handleStudentAdd} toggle={toggle} />
-        )}
-        {modalAction === "edit" && (
-          <EditModal
-            handleStudentEdit={handleStudentEdit}
-            student={student}
-            toggle={toggle}
-          />
-        )}
-        {modalAction === "info" && <InfoModal {...student} toggle={toggle} />}
+        {modalAction === "delete" && <DeleteModal />}
+        {modalAction === "add" && <AddModal />}
+        {modalAction === "edit" && <EditModal />}
+        {modalAction === "info" && <InfoModal />}
       </Modal>
     </div>
   );

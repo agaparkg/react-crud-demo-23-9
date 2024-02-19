@@ -9,27 +9,20 @@ import {
   ModalHeader,
   ModalBody,
 } from "reactstrap";
+import { useStateContextApi } from "../../utils/context/context-api";
 
-export default function EditModal({ toggle, student, handleStudentEdit }) {
+export default function EditModal() {
+  const { toggle, student, handleStudentEdit } = useStateContextApi();
   const initialValues = { ...student };
   const [values, setValues] = useState(initialValues);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // name = "fname"
-    // value = "A"
     setValues({
       ...values,
-      [name]: value, // fname: "A"
+      [name]: value,
     });
   };
-
-  //   obj = {
-  //     name: "Alex",
-  //     age: 10
-  //   }
-  // Object.keys(obj) => ["name", "age"]
-  // Object.values(obj) => ["Alex", 10]
 
   const shallowEqual = (object1, object2) => {
     const keys1 = Object.keys(object1);
@@ -41,10 +34,6 @@ export default function EditModal({ toggle, student, handleStudentEdit }) {
 
     for (let key of keys2) {
       if (object1[key] !== object2[key]) {
-        // student.fname OR student["fname"] !== values["fname"]
-        // student["lname"] !== values["lname"]
-        // student["age"] !== values["age"]
-        // ...
         return false;
       }
     }
@@ -55,9 +44,6 @@ export default function EditModal({ toggle, student, handleStudentEdit }) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    // const { fname, lname, age, company, country } = values;
-    // if (fname.trim() !== '' && lname.trim() !== '' ) {
-    // ["", "", ""....]
     if (!shallowEqual(student, values)) {
       handleStudentEdit(values);
     } else {

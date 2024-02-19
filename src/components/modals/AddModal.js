@@ -9,6 +9,7 @@ import {
   ModalHeader,
   ModalBody,
 } from "reactstrap";
+import { useStateContextApi } from "../../utils/context/context-api";
 
 const initialValues = {
   fname: "",
@@ -18,7 +19,8 @@ const initialValues = {
   age: "",
 };
 
-export default function AddModal({ toggle, handleStudentAdd }) {
+export default function AddModal() {
+  const { toggle, handleStudentAdd } = useStateContextApi();
   const [values, setValues] = useState(initialValues);
 
   const handleInputChange = (e) => {
@@ -34,9 +36,6 @@ export default function AddModal({ toggle, handleStudentAdd }) {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    // const { fname, lname, age, company, country } = values;
-    // if (fname.trim() !== '' && lname.trim() !== '' ) {
-    // ["", "", ""....]
     if (Object.values(values).every((v) => v.trim() !== "")) {
       handleStudentAdd(values);
       toggle(null, null);

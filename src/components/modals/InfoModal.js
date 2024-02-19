@@ -1,16 +1,13 @@
 import React from "react";
 import { Button, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { useStateContextApi } from "../../utils/context/context-api";
 
-export default function InfoModal({
-  toggle,
-  fname,
-  avatar,
-  lname,
-  country,
-  company,
-  age,
-  phone,
-}) {
+export default function InfoModal() {
+  const {
+    student: { fname, avatar, lname, country, company, age, phone },
+    toggle,
+  } = useStateContextApi();
+
   return (
     <>
       <ModalHeader toggle={() => toggle(null, null)}>
